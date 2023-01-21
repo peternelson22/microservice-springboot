@@ -1,0 +1,10 @@
+com\nelson\productservice\ProductServiceApplication.class
+com\nelson\productservice\Controller\ProductController.class
+com\nelson\productservice\model\Product.class
+com\nelson\productservice\model\Product$ProductBuilder.class
+com\nelson\productservice\Repository\ProductRepository.class
+com\nelson\productservice\Dto\ProductRequest.class
+com\nelson\productservice\Service\ProductService.class
+com\nelson\productservice\Dto\ProductRequest$ProductRequestBuilder.class
+com\nelson\productservice\Dto\ProductResponse$ProductResponseBuilder.class
+com\nelson\productservice\Dto\ProductResponse.class

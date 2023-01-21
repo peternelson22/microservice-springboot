@@ -1,0 +1,5 @@
+com\nelson\inventoryservice\Repository\InventoryRepository.class
+com\nelson\inventoryservice\InventoryServiceApplication.class
+com\nelson\inventoryservice\Controller\InventoryController.class
+com\nelson\inventoryservice\Service\InventoryService.class
+com\nelson\inventoryservice\Model\Inventory.class

@@ -1,0 +1,10 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/techie_product
+    username: postgres
+    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: update
