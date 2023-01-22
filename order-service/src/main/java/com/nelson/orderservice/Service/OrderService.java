@@ -3,10 +3,12 @@ package com.nelson.orderservice.Service;
 import com.nelson.orderservice.Dto.InventoryResponse;
 import com.nelson.orderservice.Dto.OrderLineItemDto;
 import com.nelson.orderservice.Dto.OrderRequest;
+import com.nelson.orderservice.Event.OrderPlaceEvent;
 import com.nelson.orderservice.Model.Order;
 import com.nelson.orderservice.Model.OrderLineItem;
 import com.nelson.orderservice.Repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -23,6 +25,7 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final WebClient.Builder webClient;
+    private final KafkaTemplate<String, OrderPlaceEvent> kafkaTemplate;
 
     public String placeOrder(OrderRequest orderRequest){
         Order order = new Order();
@@ -50,6 +53,7 @@ public class OrderService {
 
         if (allProductsInStock){
             orderRepository.save(order);
+            kafkaTemplate.send("notificationTopic", new OrderPlaceEvent(order.getOrderNumber()));
             return "Order placed successfully";
         }else {
             throw new IllegalArgumentException("Product not in stock");
