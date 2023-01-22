@@ -1,8 +1,12 @@
 server:
   port: 8081
+spring-boot:
+  version: 3.02
 spring:
   application:
     name: order-service
+    title: Order Service
+    version: 1.0
   datasource:
     url: jdbc:postgresql://localhost:5432/techie_order
     username: postgres
@@ -10,8 +14,41 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-
 eureka:
   client:
     serviceUrl:
       defaultZone: http://eureka:password@localhost:8761/eureka
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  health:
+    circuitbreakers:
+      enabled: 'true'
+  endpoint:
+    health:
+      show-details: always
+resilience4j:
+  circuitbreaker:
+    instances:
+      inventory:
+        automaticTransitionFromOpenToHalfOpenEnabled: 'true'
+        failureRateThreshold: '50'
+        slidingWindowType: COUNT_BASED
+        event-consumer-buffer-size: '10'
+        registerHealthIndicator: 'true'
+        waitDurationInOpenState: 5s
+        permittedNumberOfCallsInHalfOpenState: '3'
+        slidingWindowSize: '5'
+  retry:
+    instances:
+      inventory:
+        wait-duration: 5s
+        max-attempts: '3'
+    timelimiter:
+      instances:
+        inventory:
+          timeout-duration: 3s
+
