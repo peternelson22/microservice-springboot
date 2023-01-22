@@ -1,6 +1,8 @@
 server:
-  port: 8082
+  port: 0
 spring:
+  application:
+    name: inventory-service
   datasource:
     url: jdbc:postgresql://localhost:5432/techie_inventory
     username: postgres
@@ -8,3 +10,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: 'create-drop'
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka

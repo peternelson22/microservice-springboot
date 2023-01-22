@@ -1,6 +1,8 @@
 server:
   port: 8081
 spring:
+  application:
+    name: order-service
   datasource:
     url: jdbc:postgresql://localhost:5432/techie_order
     username: postgres
@@ -8,3 +10,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
